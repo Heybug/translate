@@ -27,22 +27,22 @@ params = {
 def fy():
     params['q'] = input('输入内容：')
 
-    # 判断输入的是否是英文
-    if params['q'][0].encode('UTF-8').isalpha():
-        params['to'] = 'zh'
-    else:
-        params['to'] = 'en'
-
-    sing = str(params['appid']) + params['q'] + str(params['salt']) + 'QtgjZZ8qaS_wltn9klBj'
-    params['sign'] = hashlib.md5(sing.encode('utf - 8')).hexdigest()
-
-    # 发起post请求
-    r = requests.post(api, data=params)
-    z = r.json()['trans_result'][0]
-
-    # 输出结果
-    print('%s \n' % (z['dst']))
     if params['q'] != 'end':
+        # 判断输入的是否是英文
+        if params['q'][0].encode('UTF-8').isalpha():
+            params['to'] = 'zh'
+        else:
+            params['to'] = 'en'
+
+        sing = str(params['appid']) + params['q'] + str(params['salt']) + 'QtgjZZ8qaS_wltn9klBj'
+        params['sign'] = hashlib.md5(sing.encode('utf - 8')).hexdigest()
+
+        # 发起post请求
+        r = requests.post(api, data=params)
+        z = r.json()['trans_result'][0]
+
+        # 输出结果
+        print('%s \n' % (z['dst']))
         fy()
 
 
